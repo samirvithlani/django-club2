@@ -44,3 +44,92 @@ class Book(Code):
     
     def __str__(self):
         return self.name    
+    
+
+
+class Course(models.Model):
+    name = models.CharField(max_length=50)
+    code = models.CharField(max_length=50)
+    
+    class Meta:
+        db_table = 'course'
+    
+    def __str__(self):
+        return self.name
+    
+    
+class Student(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    password = models.CharField(max_length=50)
+    course =models.ForeignKey(Course,on_delete=models.CASCADE)        
+    
+    class Meta:
+        db_table = 'student'
+    
+    def __str__(self):
+        return self.name
+    
+        
+class Customer(models.Model):
+    name = models.CharField(max_length=50)
+    age = models.IntegerField()
+    
+    class Meta:
+        db_table = 'customer'
+        
+    def __str__(self):
+        return self.name
+
+
+class Order(models.Model):
+    name = models.CharField(max_length=50)
+    customer = models.ManyToManyField(Customer)
+    
+    class Meta:
+        db_table = 'order'
+    
+    def __str__(self):
+        return self.name
+
+class Sender(models.Model):
+    name = models.CharField(max_length=50)
+    
+    class Meta:
+        db_table = 'sender'
+        
+    def __str__(self):
+        return self.name
+
+class Receiver(models.Model):
+    name = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = 'receiver'
+        
+    def __str__(self):
+        return self.name
+
+class Type(models.Model):
+    name = models.CharField(max_length=50)
+    
+    class Meta:
+        db_table = 'type'
+        
+    def __str__(self):
+        return self.name
+
+class Messages(models.Model):
+    msg = models.CharField(max_length=50)
+    type = models.ForeignKey(Type,on_delete=models.CASCADE)
+    sender = models.ForeignKey(Sender,on_delete=models.CASCADE)
+    receiver = models.ForeignKey(Receiver,on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True)
+    
+    class Meta:
+        db_table = 'messages'    
+
+    def __str__(self):
+        return self.msg
+        
