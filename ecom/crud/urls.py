@@ -16,10 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include #include is used to include the urls of other apps
+from . import views
 
 #admin app --> buitlin
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('product/',include('product.urls')),
-    path('crud/',include('crud.urls')),
+
+    path('create/',views.create_ProductView,name='create_product'),
+    path('list/',views.product_list,name='product_list'),
+    path('delete/<int:id>/',views.delete_product,name='delete_product'),
+    path('update/<int:id>/',views.update_product,name='update_product'),
 ]

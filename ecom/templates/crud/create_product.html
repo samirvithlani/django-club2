@@ -1,0 +1,9 @@
+<form method ="POST">
+    {% comment %} {{form.as_p}} {% endcomment %}
+    {% comment %} <table>
+    {{form.as_table}}
+    </table> {% endcomment %}
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Submit">
+</form>
