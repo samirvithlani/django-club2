@@ -1,9 +1,22 @@
+{% extends '../base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <h1>ok</h1>
 <form method ="POST">
     {% comment %} {{form.as_p}} {% endcomment %}
     {% comment %} <table>
     {{form.as_table}}
     </table> {% endcomment %}
     {% csrf_token %}
-    {{form.as_p}}
+    {% comment %} {{ form|crispy }} {% endcomment %}
+    <div style ="color:red">
+        {{form.name}}
+        {{form.name | as_crispy_field }}
+    </div>
+
     <input type="submit" value="Submit">
 </form>
+{% endblock content %}
